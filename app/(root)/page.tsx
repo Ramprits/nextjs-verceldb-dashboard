@@ -1,12 +1,19 @@
-import { UserButton } from "@clerk/nextjs";
+"use client";
+
+import { useStoreModal } from "@/hooks/use-store-modal";
+import { useEffect } from "react";
 
 export default function Home() {
+  const storeModal = useStoreModal()
+  useEffect(() => {
+    if (!storeModal.isOpen) {
+      storeModal.onOpen()
+    }
+  }, [storeModal])
+  
   return (
-    <main>
-      <header className="flex items-center justify-between px-6 py-6">
-        <h4>Welcome to Drizzle with nest.js</h4>
-        <UserButton afterSignOutUrl='/' />
-      </header>
-    </main>
+    <div className='p-4'>
+     <h3>Welcome to next.js with clerk</h3>
+    </div>
   );
 }
